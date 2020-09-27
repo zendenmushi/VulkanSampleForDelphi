@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{314D603A-F2B7-4E69-AD6C-EF7961AD1B1B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="VulkanTest.Vcl.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="VulkanTest.FMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="VulkanTest_Vcl">
+        <MSBuild Projects="VulkanTest.Vcl.dproj"/>
+    </Target>
+    <Target Name="VulkanTest_Vcl:Clean">
+        <MSBuild Projects="VulkanTest.Vcl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VulkanTest_Vcl:Make">
+        <MSBuild Projects="VulkanTest.Vcl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="VulkanTest_FMX">
+        <MSBuild Projects="VulkanTest.FMX.dproj"/>
+    </Target>
+    <Target Name="VulkanTest_FMX:Clean">
+        <MSBuild Projects="VulkanTest.FMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VulkanTest_FMX:Make">
+        <MSBuild Projects="VulkanTest.FMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="VulkanTest_Vcl;VulkanTest_FMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="VulkanTest_Vcl:Clean;VulkanTest_FMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="VulkanTest_Vcl:Make;VulkanTest_FMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

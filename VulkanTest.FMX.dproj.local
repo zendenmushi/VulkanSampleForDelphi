@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/09/26 19:56:50.000.132,=C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit10.pas</Transaction>
+    <Transaction>2020/09/26 19:57:27.000.458,C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit10.pas=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Unit10.pas</Transaction>
+    <Transaction>2020/09/26 19:57:27.000.458,C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit10.fmx=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Unit10.fmx</Transaction>
+    <Transaction>2020/09/26 19:57:50.000.829,C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Project10.dproj=C:\Dropbox\MaeGame\Delphi10_4\vulkan\VulkanTest.Mac.dproj</Transaction>
+    <Transaction>2020/09/26 19:58:34.000.666,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan.Init.pas</Transaction>
+    <Transaction>2020/09/26 19:58:40.000.160,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan.pas</Transaction>
+    <Transaction>2020/09/26 19:58:44.000.236,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan.Utils.pas</Transaction>
+    <Transaction>2020/09/26 19:58:52.000.039,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas</Transaction>
+    <Transaction>2020/09/26 19:59:00.000.914,C:\Dropbox\MaeGame\Delphi10_4\vulkan\Unit10.pas=</Transaction>
+    <Transaction>2020/09/26 19:59:24.000.066,C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas=</Transaction>
+    <Transaction>2020/09/26 19:59:34.000.124,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas</Transaction>
+    <Transaction>2020/09/26 20:01:11.000.179,C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas=</Transaction>
+    <Transaction>2020/09/26 20:01:26.000.489,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas</Transaction>
+    <Transaction>2020/09/27 13:23:39.000.254,C:\Dropbox\MaeGame\Delphi10_4\vulkan\VulkanTest.Mac.dproj=C:\Dropbox\MaeGame\Delphi10_4\vulkan\VulkanTest.FMX.dproj</Transaction>
+    <Transaction>2020/09/27 13:34:17.000.411,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\draw_textured_cube.frag</Transaction>
+    <Transaction>2020/09/27 13:34:17.000.283,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\draw_textured_cube.vert</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<PMacbookPro13 iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>
