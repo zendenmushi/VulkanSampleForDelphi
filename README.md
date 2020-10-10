@@ -2,7 +2,7 @@
 
 I'm using Vulkan.pas  converted vulkan header. (https://github.com/BeRo1985/pasvulkan)
 
-*A few changes for macOS 64bit (LogWord->UInt32, LongInt->Int32)
+*A few changes for macOS 64bit (LogWord->UInt32, LongInt->Int32), statick link libMoltenVK.a when iOS
 
 ##base sample
 Vulkan SDK 1.2.148.1
@@ -32,6 +32,6 @@ draw_textured_cube.cpp + cube.c -> Vulkan_TestMain<.Vcl/.Fmx>.pas
  
  binary :VulkanTest.FMX.exe
  
- macos64 binary is not contained. must build and deploy
+ ios/macos64 binary is not contained. must build and deploy
 
 
