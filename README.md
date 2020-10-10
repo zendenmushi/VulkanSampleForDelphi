@@ -32,6 +32,6 @@ draw_textured_cube.cpp + cube.c -> Vulkan_TestMain<.Vcl/.Fmx>.pas
  
  binary :VulkanTest.FMX.exe
  
- ios/macos64 binary is not contained. must build and deploy
+ ios/macos64 binary is not contained. must build and deploy (Test Only Debug build)
 
 
