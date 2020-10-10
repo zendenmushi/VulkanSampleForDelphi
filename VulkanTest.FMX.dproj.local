@@ -15,10 +15,8 @@
     <Transaction>2020/09/26 20:01:11.000.179,C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas=</Transaction>
     <Transaction>2020/09/26 20:01:26.000.489,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\Vulkan_TestMain.pas</Transaction>
     <Transaction>2020/09/27 13:23:39.000.254,C:\Dropbox\MaeGame\Delphi10_4\vulkan\VulkanTest.Mac.dproj=C:\Dropbox\MaeGame\Delphi10_4\vulkan\VulkanTest.FMX.dproj</Transaction>
-    <Transaction>2020/09/27 13:34:17.000.411,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\draw_textured_cube.frag</Transaction>
-    <Transaction>2020/09/27 13:34:17.000.283,=C:\Dropbox\MaeGame\Delphi10_4\vulkan\draw_textured_cube.vert</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<PMacbookPro13 iOSSimulator="iPhone5"/>
+		<PMacbookPro13 iOSSimulator="iPhone5" iOSDevice64="_iosdevice_00008027-001545463E31802E"/>
 	</ActiveMobileDevice>
 </BorlandProject>

@@ -18,7 +18,7 @@
  * limitations under the License.
  *)
 
- // Convert to pas : 2020 TMaeda
+ // Convert to pas : 2020 TMaeda  https://github.com/zendenmushi
  // If you build with FireMonkey, you must define FMX
 
 unit Vulkan.Init;
@@ -29,12 +29,14 @@ uses
 {$ifdef MSWINDOWS}
   ,Winapi.Windows, Winapi.Messages
 {$endif}
-{$ifdef MACOS}
-  ,Macapi.AppKit, Macapi.MetalKit, Macapi.ObjectiveC, Macapi.QuartzCore
+{$ifdef IOS}
+  ,iOSapi.UIkit, iOSapi.Foundation, Macapi.MetalKit, Macapi.ObjectiveC, Macapi.Helpers
+{$elseif Defined(MACOS)}
+  ,Macapi.AppKit, Macapi.Foundation, Macapi.MetalKit, Macapi.ObjectiveC, Macapi.QuartzCore, Macapi.Helpers
 {$endif}
   ,Vulkan, Vulkan.Utils
 {$ifdef FMX}
-  ,FMX.Graphics, FMX.Types, FMX.DialogS//ervice
+  ,FMX.Graphics, FMX.Types, FMX.Dialogs
 {$endif}
   ;
 
@@ -142,6 +144,10 @@ procedure DefaultLogFunc(msg : string);
 begin
 {$ifdef MSWINDOWS}
   OutputDebugString(PWideChar(msg));
+{$endif}
+{$ifdef macOS}
+  var nsstr := StringToId(msg);
+  NSLog(nsstr);
 {$endif}
 end;
 
@@ -274,7 +280,7 @@ end;
 procedure init_instance_extension_names(var info : TVulkanSampleInfo);
 begin
   info.instance_extension_names := info.instance_extension_names + [VK_KHR_SURFACE_EXTENSION_NAME];
-{$if Defined(DEBUG)}// and not Defined(MACOS)}
+{$if Defined(DEBUG)}
   info.instance_extension_names := info.instance_extension_names + [VK_EXT_DEBUG_REPORT_EXTENSION_NAME];
 {$endif}
 
@@ -317,7 +323,6 @@ begin
   inst_info.ppEnabledExtensionNames := @info.instance_extension_names[0];
 
   result := vkCreateInstance(@inst_info, nil, @info.inst);
-//  showmessage(inttostr(ord(result)));
   Assert(result = VK_SUCCESS);
 end;
 
@@ -643,11 +648,18 @@ type
 
 procedure init_window(var info : TVulkanSampleInfo; NativeHandle : NativeUInt);
 begin
+{$ifdef IOS}
+  var view := MTKView(NativeHandle);
+  view.setBounds(NSRect.Create(RectF(0,0, info.Width, info.Height)));
+  info.MetalLayer := (view.layer as ILocalObject).GetObjectID();
+
+{$else}
   var view := NSView(NativeHandle);
   var layer := TCAMetalLayer.OCClass.layer;
   view.setLayer(TCALayer.Wrap(layer));
 
   info.MetalLayer := layer;
+{$endif}
 end;
 
 {$elseif Defined(ANDROID)}

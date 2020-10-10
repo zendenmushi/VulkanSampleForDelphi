@@ -26,9 +26,10 @@
  // Windows 10 64bit  : Drawing stops when the window size is changed.
  // macOS 10.15 64bit : The libMoltenVK.dylib in the application bundle may not be used.
  //                      Perhaps the .dylib in the SDK is called
+ // iOS 13.7          : static link libMoltenVK.a
 
  // Untested
- // Android, iOS
+ // Android, Linux
 
 unit Vulkan_TestMain;
 
@@ -72,9 +73,12 @@ uses
   Winapi.Windows
   , FMX.Platform.Win
 {$endif}
-{$ifdef MACOS}
-  Macapi.CocoaTypes
-  , FMX.Platform.Mac
+{$ifdef IOS}
+  iOSapi.CocoaTypes, iOSapi.Foundation
+  , FMX.Platform.iOS, Macapi.Helpers
+{$elseif Defined(MACOS)}
+  Macapi.CocoaTypes, Macapi.Foundation
+  , FMX.Platform.Mac, Macapi.Helpers
 {$endif}
   , System.Math.Vectors
   ;
@@ -160,38 +164,49 @@ begin
 {$ifdef MSWINDOWS}
   OutputDebugStringA(pMessage);
 {$endif}
+{$ifdef macOS}
+  NSLog(StringToId(string(pMessage)));
+{$endif}
+  result := VK_FALSE;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-{$ifdef MACOS}
+{$ifdef IOS}
+  LoadVulkanLibrary();
+{$elseif Defined(MACOS)}
   LoadVulkanLibrary('libvulkan.1.2.148.dylib');
 {$else}
   LoadVulkanLibrary();
 {$endif}
+
+{$ifndef IOS}
   LoadVulkanGlobalCommands;
+{$endif}
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
-var
-  cmd_bufs : array [0..0] of TVkCommandBuffer;
-  submit_info : array [0..0] of TVkSubmitInfo;
 begin
   process_command_line_args(FSample_info);
   init_global_layer_properties(FSample_info);
   init_instance_extension_names(FSample_info);
   init_device_extension_names(FSample_info);
   init_instance(FSample_info, 'Draw Texture Sample');
+{$ifdef IOS}
+  LoadVulkanGlobalCommands(FSample_info.Inst);
+{$endif}
 {$ifdef DEBUG}
   init_debug_report_callback(FSample_info, debug_func);
 {$endif}
   init_enumerate_device(FSample_info);
-//  init_window_size(FSample_info, Trunc(ClientWidth*Handle.Scale), Trunc(ClientHeight*Handle.Scale));
   init_connection(FSample_info);
 {$ifdef MSWINDOWS}
   init_window(FSample_info, NativeUInt(WindowHandleToPlatform(Handle).Wnd));
 {$endif}
-{$ifdef MACOS}
+{$ifdef IOS}
+  init_window_size(FSample_info, Trunc(ClientWidth*Handle.Scale), Trunc(ClientHeight*Handle.Scale));
+  init_window(FSample_info, NativeUInt(WindowHandleToPlatform(Handle).MTView));
+{$elseif Defined(MACOS)}
   init_window(FSample_info, NativeUInt(WindowHandleToPlatform(Handle).View));
 {$endif}
   init_swapchain_extension(FSample_info);
@@ -205,12 +220,12 @@ begin
 
   FSample_info.Model := TMatrix3D.Create(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1); // <- Move from Vulkan.init.pas
 
-  PrepareVulkan(); //----------+
-end;               //          |
-                   //          V
+  PrepareVulkan();
+end;
+
 procedure TMainForm.PrepareVulkan();
 begin
-{$ifdef MSWINDOWS}
+{$if defined(MSWINDOWS) or Defined(IOS)}
   init_window_size(FSample_info, Trunc(ClientWidth*Handle.Scale), Trunc(ClientHeight*Handle.Scale));
 {$else}
   init_window_size(FSample_info, ClientWidth, ClientHeight);
@@ -502,6 +517,10 @@ begin
   end;
 end;
 
+initialization
 
+{$ifdef IOS}
+  GlobalUseMetal := true;
+{$endif}
 
 end.

@@ -18,22 +18,24 @@
  * limitations under the License.
  *)
 
- // Convert to pas : 2020 TMaeda
+ // Convert to pas : 2020 TMaeda  https://github.com/zendenmushi
  // If you build with FireMonkey, you must define FMX
 
 unit Vulkan.Utils;
 
 interface
 uses
-  System.Classes, System.SysUtils, System.Math.Vectors,
-  Vulkan,
+  System.Classes, System.SysUtils, System.Math.Vectors, System.IOUtils
+  , Vulkan
 {$ifdef FMX}
-  FMX.Platform, FMX.Types,
+  , FMX.Platform, FMX.Types
 {$endif}
 {$ifdef MSWINDOWS}
-  Winapi.Windows
+  , Winapi.Windows
+{$elseif Defined(IOS)}
+  , iOSapi.CocoaTypes
 {$else}
-  Macapi.Cocoatypes
+  , Macapi.Cocoatypes
 {$endif}
   ;
 
@@ -298,6 +300,8 @@ function get_base_data_dir() : string;
 begin
 {$ifdef ANDROID}
     result := '';
+{$elseif Defined(IOS)}
+    result := IncludeTrailingPathDelimiter(TPath.GetDocumentsPath);
 {$elseif Defined(MACOS)}
     result := ExtractFilePath(ParamStr(0)) + '../Resources/data/';
 {$else}
